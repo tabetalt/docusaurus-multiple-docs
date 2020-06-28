@@ -40,6 +40,7 @@ export default function pluginContentDocs(
   return {
     name: "docusaurus-plugin-content-docs",
     getThemePath() {
+      console.log("themepath", contentDocs[0].getThemePath!());
       return contentDocs[0].getThemePath!();
     },
     // @todo Add support for extendCli
@@ -56,7 +57,22 @@ export default function pluginContentDocs(
       logger.log("getPathsToWatch", paths);
       return paths;
     },
-    // getClientModules
+    getClientModules() {
+      const modules = [];
+
+      let shouldIncludeAdmonitions = false;
+      options.forEach(opts => {
+        if (opts.admonitions) {
+          shouldIncludeAdmonitions = true;
+        }
+      })
+      
+      if (shouldIncludeAdmonitions) {
+        modules.push(require.resolve("remark-admonitions/styles/infima.css"));
+      }
+
+      return modules;
+    },
     async loadContent() {
       // const contents: MultiLoadedContent[] = [];
 
