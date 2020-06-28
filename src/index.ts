@@ -35,12 +35,9 @@ export default function pluginContentDocs(
     ...PluginContentDocs(context, opts),
   }));
 
-  logger.log("FIRST", contentDocs[0]);
-
   return {
     name: "docusaurus-plugin-content-docs",
     getThemePath() {
-      console.log("themepath", contentDocs[0].getThemePath!());
       return contentDocs[0].getThemePath!();
     },
     // @todo Add support for extendCli
@@ -54,7 +51,7 @@ export default function pluginContentDocs(
           }
           return pths;
         }, []);
-      logger.log("getPathsToWatch", paths);
+
       return paths;
     },
     getClientModules() {
@@ -66,7 +63,7 @@ export default function pluginContentDocs(
           shouldIncludeAdmonitions = true;
         }
       })
-      
+
       if (shouldIncludeAdmonitions) {
         modules.push(require.resolve("remark-admonitions/styles/infima.css"));
       }
@@ -88,12 +85,9 @@ export default function pluginContentDocs(
         })
       );
 
-      logger.log("loadContent", contents);
-
       return (contents as MultiLoadedContent[]).filter((c) => c);
     },
     async contentLoaded({ content, actions }) {
-      logger.log("contentLoaded", content);
       await Promise.all(
         contentDocs.map(async (c) => {
           if (c && c.contentLoaded && content) {
@@ -116,7 +110,6 @@ export default function pluginContentDocs(
           d.configureWebpack(_config, isServer, utils)
         );
       }, {});
-      logger.log("webpack", webpack);
       return webpack;
     },
     // docsMetadata
