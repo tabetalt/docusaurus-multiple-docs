@@ -1,0 +1,29 @@
+{
+  "name": "docusaurus-multiple-docs",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "version": "1.0.0",
+  "repository": "git@github.com:tabetalt/docusaurus-multiple-docs.git",
+  "description": "Run multiple instances of @docusaurus/plugin-content-docs",
+  "author": "Tabetalt.no AS",
+  "keywords": [
+    "docusaurus",
+    "multiple",
+    "docs"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@docusaurus/types": "^2.0.0-alpha.37",
+    "prettier": "^2.0.5",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@docusaurus/plugin-content-docs": "^2.0.0-alpha.58",
+    "deepmerge": "^4.2.2"
+  }
+}
